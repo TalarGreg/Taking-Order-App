@@ -18,7 +18,11 @@ Training notebooks train and evaluate multiple models with metrics (RMSE, MAE, s
 
 The `gen_toa_data_v2.py script` generates JSON order events and sends them to the Eventstream `es_toa`.
 It leverages the azure-eventhub Python SDK to publish data into Microsoft Fabric Eventstream.
+<img width="1153" height="134" alt="script_cmd" src="https://github.com/user-attachments/assets/c6e1f514-bac4-4917-a7a4-5a926f6ff4b0" />
+<img width="1598" height="643" alt="image" src="https://github.com/user-attachments/assets/a251e1c9-1f31-454c-9dfa-9761dfe58788" />
+
 
 The script uses a small file `order_id_counter.txt` to persist the current order ID so that, if data generation is interrupted, the sequence can continue seamlessly on the next run.
 
 To run the script correctly, it is essential to provide valid `EVENTHUB_NAME` and `CONNECTION_STR` environment variables. These values can be obtained directly from the Eventstream Live mode under Source details.
+<img width="1476" height="719" alt="image" src="https://github.com/user-attachments/assets/724fcc79-e1b1-4491-9166-ba21a2d2281c" />
