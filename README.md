@@ -71,6 +71,7 @@ Additionally, to improve performance, the tables 'stg_silver_orders, stg_silver_
 # 5. Data orchestration – Data pipelines pl_etl_gold_agg_daily_sales step 2
 
 
+<img width="550" height="378" alt="image" src="https://github.com/user-attachments/assets/c6dabd91-cb9f-4d53-a44e-5681cf18a044" />
 
 
 
