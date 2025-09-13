@@ -44,6 +44,7 @@ This KQL query retrieves data from the 'eventstream_table' for the last 10 minut
 
 <img width="565" height="407" alt="image" src="https://github.com/user-attachments/assets/002474a2-98e1-4043-8fb8-316c5c21e8f3" />
 
+# 4. Data orchestration – Data pipelines step 1
 
 
 
