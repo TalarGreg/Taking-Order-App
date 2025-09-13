@@ -69,10 +69,15 @@ Additionally, to improve performance, the tables 'stg_silver_orders, stg_silver_
 
 
 # 5. Data orchestration – Data pipelines pl_etl_gold_agg_daily_sales step 2
+Daily sales upsert (Gold layer) with 7-day rolling refresh for performance and data hygiene.
+This query aggregates daily sales per restaurant from the Silver table `stg_silver_orders` and MERGEs the results into the Gold table `tbl_gold_agg_daily_sales`. The MERGE pattern performs an upsert: it updates existing rows and inserts new ones based on the composite key `partition_date, restaurant_id`. To keep the job efficient and focused on data that is still changing, the pipeline recomputes only the last 7 days:
 
+The source window is restricted with `WHERE partition_date >= current_date() - 7`, so only the most recent 7 days are recalculated. Late-arriving data older than 7 days is intentionally ignored and will not be loaded into the Gold layer. Using MERGE avoids full overwrites, reduces compute and I/O, and preserves partition pruning on partition_date.
+`sales_amount` is cast to `DECIMAL(18,2` to ensure consistent currency precision.
 
 <img width="550" height="378" alt="image" src="https://github.com/user-attachments/assets/c6dabd91-cb9f-4d53-a44e-5681cf18a044" />
 
+tbl_gold_agg_daily_sales remains an up-to-date, query-friendly fact table for dashboards, refreshed quickly by targeting only the active 7-day window.
 
 
 
