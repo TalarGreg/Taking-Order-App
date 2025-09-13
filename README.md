@@ -13,3 +13,12 @@ Training notebooks train and evaluate multiple models with metrics (RMSE, MAE, s
 
 ## Project Architecture
 <img width="1409" height="883" alt="msf_data_lineage" src="https://github.com/user-attachments/assets/57a96552-4428-40d5-b7a4-d7658a1f638c" />
+
+# 1. Python script - data generation
+
+The `gen_toa_data_v2.py script` generates JSON order events and sends them to the Eventstream `es_toa`.
+It leverages the azure-eventhub Python SDK to publish data into Microsoft Fabric Eventstream.
+
+The script uses a small file `order_id_counter.txt` to persist the current order ID so that, if data generation is interrupted, the sequence can continue seamlessly on the next run.
+
+To run the script correctly, it is essential to provide valid `EVENTHUB_NAME` and `CONNECTION_STR` environment variables. These values can be obtained directly from the Eventstream Live mode under Source details.
