@@ -1,7 +1,6 @@
 # MS Fabric Taking Order App (toa)
 
 ## General description
-General description
 The solution is built natively on Microsoft Fabric and implements an end-to-end data pipeline for real-time order ingestion, transformation, forecasting, and reporting.
 
 Daily Sales Dashboard – aggregated restaurant sales metrics refreshed from the gold layer.
