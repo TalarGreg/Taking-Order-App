@@ -44,13 +44,28 @@ This KQL query retrieves data from the 'eventstream_table' for the last 10 minut
 
 <img width="565" height="407" alt="image" src="https://github.com/user-attachments/assets/002474a2-98e1-4043-8fb8-316c5c21e8f3" />
 
-# 4. Data orchestration – Data pipelines step 1
+# 4. Data orchestration – Data pipelines pl_etl_silver - step 1
+The data pipeline triggers the `notebooks/nb_etl_silver` notebook every 10 minutes. This ensures the Silver layer is refreshed at a reasonably high frequency, which is sufficient for reporting purposes.
+<img width="1725" height="521" alt="image" src="https://github.com/user-attachments/assets/c3baed96-41fe-4279-9776-3fee065eec28" />
+
+The notebook uses a Change Data Capture (CDC) mechanism, with the control table `cdc_control` storing the last processed Delta version. If no changes are detected in `tbl_bronze_raw`, the script terminates with the message “No new changes to process.” When new data appears, it selects the insert operations since the last refresh, applies basic data quality rules `total_amount >= 0`, and normalizes key fields:
+<img width="574" height="665" alt="image" src="https://github.com/user-attachments/assets/cf2399e9-16af-4412-8b51-cfc4e151a466" />
 
 
+Parses and casts identifiers `order_id, restaurant_id, register_id, employee_id` and categorical enums `register_type, order_size` into integer surrogate keys.
 
+Unnests nested structures:
 
+`items` (a struct derived from JSON) → produces `items_df`, expanding each product into a `<product>_qty` column, while retaining `order_id` and `partition_date`.
 
+`IsWeather` - extracts weather attributes into `weather_df`.
 
+The process generates three curated Silver tables: `stg_silver_orders, stg_silver_items, and stg_silver_weather`.
+
+Each write is tagged with a `batch_id` equal to the current Delta version for full traceability. Tables are written sequentially, and a transaction-like guard tracks successful writes. If a failure occurs, the job performs a selective rollback `DELETE … WHERE batch_id = <id>` only on the tables already saved, ensuring consistency without requiring full rewrites. On success, the control table is updated to the `current_version`.
+
+Additionally, to improve performance, the tables 'stg_silver_orders, stg_silver_items, and stg_silver_weather' are partitioned by partition_date.
+<img width="1095" height="509" alt="image" src="https://github.com/user-attachments/assets/104cf2de-2af8-4088-9982-cb99f5b3a0be" />
 
 
 
