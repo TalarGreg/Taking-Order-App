@@ -101,25 +101,35 @@ The goal of this ML model is to provide predictive insights for restaurant staff
 Input data comes from the Silver tables `stg_silver_orders, stg_silver_items`, and `stg_silver_weather`. 
 These datasets are combined into a single DataFrame, followed by a series of transformations and aggregations:
 
-  Weather conditions are converted from categorical values (rainy, snowy, sunny, cloudy) into numeric codes (1–4).
+  - weather conditions are converted from categorical values (rainy, snowy, sunny, cloudy) into numeric codes (1–4).
 
-  Null values are filtered out to maintain data quality.
+  - null values are filtered out to maintain data quality.
+  
+<img width="526" height="345" alt="image" src="https://github.com/user-attachments/assets/51a934be-1f6d-4f51-8c64-6ef3b2842f3a" />
 
   Data is aggregated into daily 10-minute buckets, including:
 
-  Time features: bucket_time (HH:mm), day_of_week.
+  - time features: bucket_time (HH:mm), day_of_week.
 
-  Weather features: temperature_avg, humidity_avg, condition_code.
+  - weather features: temperature_avg, humidity_avg, condition_code.
 
-  Sales features: product quantities, lags, rolling means, and day-over-day changes.
+  - sales features: product quantities, lags, rolling means, and day-over-day changes.
 
 The label for the model is `qty_next_10m`, representing the number of items expected in the next bucket. The training dataset therefore contains both `qty_10m` (total sales in the current 10-minute window) and the shifted label for the following bucket.
+<img width="542" height="389" alt="image" src="https://github.com/user-attachments/assets/104b05d5-9454-4efe-b3ef-b0a8a6d83c6b" />
+
+<img width="680" height="553" alt="image" src="https://github.com/user-attachments/assets/5579f8fe-59c1-4450-b67d-7a1939003944" />
+
+I transformed the raw labeled data into a fully numeric feature set suitable for machine learning. Time features were encoded with sin/cos transformations (to capture cyclic patterns of hours and weekdays), weather attributes were cast to numeric values with additional binary flags (e.g., is_rain), and sales dynamics were enriched with lags, rolling averages, and change deltas. Missing values were filled with defaults to avoid nulls, and the target label `qty_next_10m` was retained. The output is a clean numeric dataset `df_train_num` ready for training regression models.
+
+<img width="1435" height="278" alt="image" src="https://github.com/user-attachments/assets/a6c7d084-cf37-4207-a960-edaf9c7965f4" />
 
 Model training was conducted in Microsoft Fabric using notebook `nb_ml_model_training_set` and the experiment `eh_10m_forecast_simple`. Two candidate models were evaluated: Linear Regression (LR) and Gradient Boosted Trees (GBT), both trained on one week of historical data. The results were assessed using standard regression metrics (RMSE and MAE), which guided the selection of the preferred model.
 
+<img width="967" height="563" alt="image" src="https://github.com/user-attachments/assets/55bba4d9-96d5-483b-a7b1-9f046292a498" />
 
+<img width="962" height="554" alt="image" src="https://github.com/user-attachments/assets/a12cab13-1c79-4eac-8189-183442356bcf" />
 
-
-
+Two candidate models were evaluated for the 10-minute order forecasting task: Gradient Boosted Trees (GBT) and Linear Regression (LR). The performance was measured using MAE (Mean Absolute Error) and RMSE (Root Mean Squared Error). The results showed that LR outperformed GBT on both metrics — achieving an MAE of 43.17 compared to 50.44 for GBT, and an RMSE of 57.64 compared to 117.25. These outcomes indicate that the linear model provided more stable and accurate predictions, while the GBT model likely overfit given the relatively small dataset and the mostly linear nature of the features (time buckets, lags, weather).
 
 
