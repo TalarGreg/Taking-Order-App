@@ -132,4 +132,19 @@ Model training was conducted in Microsoft Fabric using notebook `nb_ml_model_tra
 
 Two candidate models were evaluated for the 10-minute order forecasting task: Gradient Boosted Trees (GBT) and Linear Regression (LR). The performance was measured using MAE (Mean Absolute Error) and RMSE (Root Mean Squared Error). The results showed that LR outperformed GBT on both metrics — achieving an MAE of 43.17 compared to 50.44 for GBT, and an RMSE of 57.64 compared to 117.25. These outcomes indicate that the linear model provided more stable and accurate predictions, while the GBT model likely overfit given the relatively small dataset and the mostly linear nature of the features (time buckets, lags, weather).
 
+Subsequently, a Linear Regression (LR) model was created and registered as ml_model_10m_forecast, serving as the baseline forecasting model.
 
+<img width="1373" height="596" alt="image" src="https://github.com/user-attachments/assets/44d89771-107f-47af-8b9e-1e0a203190fb" />
+
+<img width="1370" height="519" alt="image" src="https://github.com/user-attachments/assets/2b09bd37-0bca-4ba8-a008-e16873b0163d" />
+
+After running and evaluating the predictions from ml_model_10m_forecast, the following metrics were obtained: sMAPE-accuracy of 20.26%, MAPE-accuracy (excluding zeros) of -77.99% on 1,242 rows, and Accuracy@10% of 6.28%. These results indicate that while the model was able to capture broad demand trends (such as peaks at lunch or dinner hours), its overall predictive accuracy was low, making it more of a prototype or proof-of-concept than a production-ready solution.
+
+
+<img width="638" height="196" alt="image" src="https://github.com/user-attachments/assets/c76d96cf-f70f-47c6-8e50-9fcc9376b5d9" />
+
+After running and evaluating the predictions from ml_model_10m_forecast, the following metrics were obtained: sMAPE-accuracy of 20.26%, MAPE-accuracy (excluding zeros) of -77.99% on 1,242 rows, and Accuracy@10% of 6.28%. These results indicate that while the model was able to capture broad demand trends (such as peaks at lunch or dinner hours), its overall predictive accuracy was low, making it more of a prototype or proof-of-concept than a production-ready solution.
+
+This means that only a small portion of forecasts fall within ±10% of the actual values. The model successfully illustrates the general trend (lunch and dinner hours) but is not accurate enough to replace manual planning. However, in a business process, such a prototype can still serve as a valuable tool for exploration and as inspiration for further development — for example, by enriching the feature set and adjusting the forecasting horizon.
+
+## Conclusions from the ML Model Development Process
