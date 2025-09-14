@@ -94,9 +94,28 @@ This is a simple but effective analytical report built on top of the Gold table 
 <img width="1454" height="865" alt="image" src="https://github.com/user-attachments/assets/6e57644d-7056-47a7-9285-1b059e245c71" />
 
 
+# 7. ML Model
 
+The goal of this ML model is to provide predictive insights for restaurant staff, allowing them to easily estimate the expected number of orders in the next 10 minutes. Such forecasts help both the kitchen and front-of-house teams plan resources more effectively based on anticipated demand.
 
+Input data comes from the Silver tables `stg_silver_orders, stg_silver_items`, and `stg_silver_weather`. 
+These datasets are combined into a single DataFrame, followed by a series of transformations and aggregations:
 
+  Weather conditions are converted from categorical values (rainy, snowy, sunny, cloudy) into numeric codes (1–4).
+
+  Null values are filtered out to maintain data quality.
+
+  Data is aggregated into daily 10-minute buckets, including:
+
+  Time features: bucket_time (HH:mm), day_of_week.
+
+  Weather features: temperature_avg, humidity_avg, condition_code.
+
+  Sales features: product quantities, lags, rolling means, and day-over-day changes.
+
+The label for the model is `qty_next_10m`, representing the number of items expected in the next bucket. The training dataset therefore contains both `qty_10m` (total sales in the current 10-minute window) and the shifted label for the following bucket.
+
+Model training was conducted in Microsoft Fabric using notebook `nb_ml_model_training_set` and the experiment `eh_10m_forecast_simple`. Two candidate models were evaluated: Linear Regression (LR) and Gradient Boosted Trees (GBT), both trained on one week of historical data. The results were assessed using standard regression metrics (RMSE and MAE), which guided the selection of the preferred model.
 
 
 
