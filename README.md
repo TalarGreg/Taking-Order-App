@@ -8,6 +8,10 @@
 - [5. Data orchestration – Data pipelines pl_etl_gold_agg_daily_sales step 2](#5-data-orchestration--data-pipelines-pl_etl_gold_agg_daily_sales-step-2)
 - [6. Report pb_gold_agg_daily_sales](#6-report-pb_gold_agg_daily_sales)
 - [7. ML Model](#7-ml-model)
+- [8. Optimize & Maintenance Flow](#8-optimize--maintenance-flow)
+- [9. Data Export (Backup)](#9-data-export-backup)
+- [10. Summary](#10-summary)
+
 
 ## General description
 The solution is built natively on Microsoft Fabric and implements an end-to-end data pipeline for real-time order ingestion, transformation, forecasting, and reporting.
@@ -184,3 +188,13 @@ To ensure data protection and enable potential reuse in other projects, the data
 
 <img width="1141" height="315" alt="image" src="https://github.com/user-attachments/assets/3d31e69a-2c4a-43ea-a305-6295bc1ca45a" />
 
+
+# 10. Summary
+
+This project showcases an end-to-end data and analytics solution fully built in Microsoft Fabric, starting from synthetic event generation and ingestion through Eventstream, data transformation via Bronze–Silver–Gold Lakehouse layers, and culminating in both reporting (Power BI dashboards, real-time KQL reports) and machine learning experimentation.
+
+The implementation demonstrates the strength of Fabric as a unified platform for data pipelines, orchestration, storage optimization, and model training — all without the need to integrate external tools. While the prototype ML model `ml_model_10m_forecast` is not yet precise enough for production use, it highlights the potential of applying predictive analytics to operational planning.
+
+The project also emphasizes the importance of data quality and feature richness, as well as the benefits of proper maintenance flows (daily `OPTIMIZE`, weekly `VACUUM`) and backup strategies for long-term data protection.
+
+Overall, this solution stands as a proof of concept that combines real-time ingestion, scalable data engineering, analytics, and machine learning in a single environment. It provides a strong foundation for further exploration and development towards production-ready demand forecasting.
