@@ -177,4 +177,10 @@ The optimization process is implemented in the `nb_optimize` notebook, orchestra
 <img width="583" height="675" alt="image" src="https://github.com/user-attachments/assets/3cbd73f7-c17d-403a-83ab-432251656204" />
 
 
+# 9. Data Export (Backup)
+To ensure data protection and enable potential reuse in other projects, the dataset was exported to a file and then transferred to my local disk using the OneLake tool.
+
+<img width="871" height="120" alt="image" src="https://github.com/user-attachments/assets/dc55091a-8355-4a37-b10f-172cc7576732" />
+
+<img width="1141" height="315" alt="image" src="https://github.com/user-attachments/assets/3d31e69a-2c4a-43ea-a305-6295bc1ca45a" />
 
