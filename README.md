@@ -1,7 +1,7 @@
 # MS Fabric Taking Order App (toa)
 
 ## Table of Contents
-- [1. Python script - data generation](https://github.com/TalarGreg/Taking-Order-App/edit/main/README.md#1-python-script---data-generation)
+- [1. Python script - data generation](#1-python-script---data-generation)
 - [2. Eventstream – ingest and data distribution](#2-eventstream--ingest-and-data-distribution)
 
 ## General description
