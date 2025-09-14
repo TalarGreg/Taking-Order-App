@@ -147,4 +147,24 @@ After running and evaluating the predictions from ml_model_10m_forecast, the fol
 
 This means that only a small portion of forecasts fall within ±10% of the actual values. The model successfully illustrates the general trend (lunch and dinner hours) but is not accurate enough to replace manual planning. However, in a business process, such a prototype can still serve as a valuable tool for exploration and as inspiration for further development — for example, by enriching the feature set and adjusting the forecasting horizon.
 
-## Conclusions from the ML Model Development Process
+## Conclusions from the ML Model Development Process in MS Fabric
+- Seamless integration - 
+The project demonstrated the ability to connect Eventstream, Lakehouse (Bronze/Silver/Gold), ML notebooks, and Power BI within a single platform, eliminating the need for multiple separate tools.
+
+- Prototype limitations -
+The model in its current form cannot reliably support business processes, as the predictions do not accurately reflect real-world demand.
+
+- Rapid prototyping -
+Microsoft Fabric enables quick implementation of proof-of-concepts (PoCs) in one environment, streamlining experimentation and validation.
+
+- Data quality dependency -
+The limited accuracy of the model highlighted the importance of data quality and breadth (e.g., historical records, holidays, promotions) as critical factors for business value.
+
+- Exploratory value -
+Although not production-ready, the prototype serves as a useful exploratory tool and provides a strong foundation for further development aimed at supporting operational planning.
+
+
+
+
+
+
