@@ -3,6 +3,11 @@
 ## Table of Contents
 - [1. Python script - data generation](#1-python-script---data-generation)
 - [2. Eventstream – ingest and data distribution](#2-eventstream--ingest-and-data-distribution)
+- [3. Eventhouse and Real-Time Report eh_rtdb_last_10m_orders](#3-eventhouse-and-real-time-report-eh_rtdb_last_10m_orders)
+- [4. Data orchestration – Data pipelines pl_etl_silver - step 1](#4-data-orchestration--data-pipelines-pl_etl_silver---step-1)
+- [5. Data orchestration – Data pipelines pl_etl_gold_agg_daily_sales step 2](#5-data-orchestration--data-pipelines-pl_etl_gold_agg_daily_sales-step-2)
+- [6. Report pb_gold_agg_daily_sales](#6-report-pb_gold_agg_daily_sales)
+- [7. ML Model](#7-ml-model)
 
 ## General description
 The solution is built natively on Microsoft Fabric and implements an end-to-end data pipeline for real-time order ingestion, transformation, forecasting, and reporting.
