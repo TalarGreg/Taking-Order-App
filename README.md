@@ -1,5 +1,9 @@
 # MS Fabric Taking Order App (toa)
 
+## Table of Contents
+- [1. Python script - data generation](https://github.com/TalarGreg/Taking-Order-App/edit/main/README.md#1-python-script---data-generation)
+- [2. Eventstream – ingest and data distribution](#2-eventstream--ingest-and-data-distribution)
+
 ## General description
 The solution is built natively on Microsoft Fabric and implements an end-to-end data pipeline for real-time order ingestion, transformation, forecasting, and reporting.
 
@@ -80,7 +84,8 @@ The source window is restricted with `WHERE partition_date >= current_date() - 7
 tbl_gold_agg_daily_sales remains an up-to-date, query-friendly fact table for dashboards, refreshed quickly by targeting only the active 7-day window.
 
 
-
+# 6. Report pb_gold_agg_daily_sales
+<img width="1644" height="899" alt="image" src="https://github.com/user-attachments/assets/3e3eefa8-a9c3-4f44-89ef-4afb882c1a03" />
 
 
 
