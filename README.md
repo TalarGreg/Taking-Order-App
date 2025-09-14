@@ -14,7 +14,7 @@
 
 
 ## General description
-The solution is built natively on Microsoft Fabric and implements an end-to-end data pipeline for real-time order ingestion, transformation, forecasting, and reporting.
+The solution is built natively on Microsoft Fabric and implements an end-to-end data pipeline for real-time order ingestion, transformation, forecasting, and reporting. It also includes a machine learning model designed to estimate the expected number of orders in the next 10 minutes.
 
 Daily Sales Dashboard – aggregated restaurant sales metrics refreshed from the gold layer.
 
