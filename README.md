@@ -171,5 +171,10 @@ Although not production-ready, the prototype serves as a useful exploratory tool
 
 
 
+# 8. Optimize & Maintenance Flow
+The optimization process is implemented in the `nb_optimize` notebook, orchestrated by the Data Pipeline `pl_optimize`, which runs daily at 11:30 PM. During execution, the pipeline performs an `OPTIMIZE` operation on all Silver tables (restricted to the current day’s partition) and on the Bronze table. In addition, a weekly maintenance task runs every Saturday, executing a `VACUUM` operation on both Bronze and Silver tables to clean up obsolete data and maintain storage efficiency.
+
+<img width="583" height="675" alt="image" src="https://github.com/user-attachments/assets/3cbd73f7-c17d-403a-83ab-432251656204" />
+
 
 
